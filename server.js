@@ -1,0 +1,11 @@
+const express=require('express')
+const srv=require('express')()
+const todoroute=require('./routes/todos')
+srv.get('/hello',function(req,res){
+    res.send("hello")
+})
+srv.use(express.json())
+srv.use(express.urlencoded({extended:true}))
+srv.use('/public',express.static(__dirname+ "/public"))
+srv.use('/todos',todoroute)
+srv.listen(4567)
