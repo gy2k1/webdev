@@ -1,11 +1,11 @@
 const express=require('express')
-const srv=require('express')()
-const todoroute=require('./routes/todos')
-srv.get('/hello',function(req,res){
-    res.send("hello")
-})
-srv.use(express.json())
-srv.use(express.urlencoded({extended:true}))
-srv.use('/public',express.static(__dirname+ "/public"))
-srv.use('/todos',todoroute)
-srv.listen(4567)
+const path=require('path')
+
+const app=express();
+
+app.use(express.json)
+app.use(express.urlencoded({extended:true}))
+app.use('/',express.static(path.join(__dirname,'public')))
+app.use('/api',require('./routes/api').route)
+
+app.listen(2678)
